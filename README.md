@@ -1,4 +1,4 @@
-# AWS-Kubernetes---CLI
+# aws-kubernetes---CLI
 
 # 🚀 Deploying Amazon EKS with EC2 Node Groups & Standalone EC2 Instances
 
