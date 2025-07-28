@@ -1,0 +1,65 @@
+YAML Configuration and Deployment
+
+1) YAML manifest file is created using the command $ vim my-deployment.yaml
+2) Next step is to create a configuration file
+3) Verify deployment using the kubectl command to verify that the resources have been created successfully and are running as expected
+4) If the user needs to delete resources, must use the kubectl delete command with appropriate resource type and name
+
+-------------------------------------------------------------------------------------------------------------------------
+Create a YAML manifest file called:
+
+"$ vim my-deployment.yaml"
+
+Deployment can be created by running the following command:
+
+"$ kubectl create -f my-deployment.yaml"
+
+Confirm if a deployment has been created by checking the deployment status:
+
+"$ kubectl get deployments my-deployment"
+
+Confirm the number of Pods running by checking the pod status
+
+"$ kubectl get pods"
+
+Pod instance can be deleted by:
+
+"$ kubectl delete pod <Name>"
+
+------------------------------------------------------------------------------------------------------------------------
+Update and rollback of deployment
+
+Example: If Nginx pods should be updated to use the nginx:1.16.1 image instead of nginx:1.14.2 image
+
+"kubectl set image deployment.v1.apps/nginx-deployment nginx=nginx:1.16.1"
+
+Check the rollout status by running:
+
+"kubectl rollout status deployment/nginx-deployment"
+
+Confirm if deployment updated the pods by creating a new ReplicaSet, scaling it to 3 replicas:
+
+"kubectl get rs"
+
+Check rollout status to verify:
+
+"kubectl rollout status deployment/nginx-deloyment"
+
+Check rollout history of a deployment:
+
+"kubectl rollout history deployment/nginx-deployment"
+
+Details on each revision:
+
+"kubectl rollout history deployment/nginx-deployment --revision=2"
+
+--------------------------------------------------------------------------------------------------------------------------
+Scaling a Deployment
+
+Command used to scale a deployment:
+
+"kubectl scale deployment/nginx-deployment --replicas=10"
+
+Command used to configure an auto-scaler, choose minimum and maximum number of pods:
+
+"kubectl autoscale deployment/nginx-deployment --min=20 --max=35 --cpu-percent=85"
